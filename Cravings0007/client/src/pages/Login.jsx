@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import loginBg from "../assets/pinkLoginBG.jpg";
+import loginBg from "../assets/LoReBG.webp";
 
 const Login = () => {
   const [loginData, setLoginData] = useState({
@@ -35,7 +35,7 @@ const Login = () => {
       }}
     >
       <div className="w-[450px] bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl p-10">
-        <h1 className="text-4xl font-bold text-gray-800">Welcome Back 👋🏻</h1>
+        <h2 className="text-4xl font-bold text-gray-800 text-center">Welcome Back</h2>
 
         <p className="text-gray-600 mt-2">
           Login to continue ordering your favourite food.
@@ -77,7 +77,7 @@ const Login = () => {
           <div className="flex justify-end mt-3">
             <button
               type="button"
-              className="text-sm text-pink-600 hover:underline"
+              className="text-sm text-black-600 hover:underline"
             >
               Forgot Password?
             </button>
@@ -85,14 +85,14 @@ const Login = () => {
 
           <button
             type="submit"
-            className="w-full mt-5 bg-pink-500 text-white py-3 rounded-xl font-semibold hover:bg-pink-600 transition duration-300"
+            className="w-full mt-5 bg-blue-500 text-white py-3 rounded-xl font-semibold hover:bg-red-600 transition duration-300"
           >
             Login
           </button>
 
           <p className="text-center mt-5 text-gray-600">
             Don't have an account?{" "}
-            <span className="text-pink-600 font-semibold cursor-pointer hover:underline">
+            <span className="text-black-600 font-semibold cursor-pointer hover:underline">
               Register
             </span>
           </p>

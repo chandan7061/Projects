@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import loginBg from "../assets/pinkLoginBG.jpg";
+import loginBg from "../assets/LoReBG.webp";
+import api from "../config/api.config.js";
 
 const Register = () => {
   const [registerData, setRegisterData] = useState({
@@ -10,6 +11,8 @@ const Register = () => {
     confirmPassword: "",
   });
 
+  const [validateError, setValidateError] = useState();
+
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -19,12 +22,31 @@ const Register = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    // console.log(registerData);
+    if (registerData.password !== registerData.confirmPassword) {
+      setValidateError("Passwords do not match");
+      return;
+    }
 
-    console.log(registerData);
+    setValidateError("");
+    console.log("Register data submitted:", registerData);
+
+    const payload = {
+      fullName: registerData.fullName,
+      email: registerData.email.toLowerCase(),
+      gender: registerData.gender,
+      password: registerData.password,
+    };
+
+    try {
+      const res = await api.post("/auth/register", payload);
+      alert(res.data.message);
+    } catch (error) {
+      console.log(res?.data?.message || error.message);
+    }
   };
-
   return (
     <div
       className="h-[90vh] flex justify-end items-center bg-cover bg-center pr-30"
@@ -114,14 +136,14 @@ const Register = () => {
 
           <button
             type="submit"
-            className="w-full bg-pink-500 text-white py-3 rounded-xl font-semibold hover:bg-pink-600 transition duration-300"
+            className="w-full bg-blue-500 text-white py-3 rounded-xl font-semibold hover:bg-red-600 transition duration-300"
           >
             Register
           </button>
 
           <p className="text-center text-gray-600">
             Already have an account?{" "}
-            <span className="text-pink-600 font-semibold cursor-pointer hover:underline">
+            <span className="text-black-600 font-semibold cursor-pointer hover:underline">
               Login
             </span>
           </p>
