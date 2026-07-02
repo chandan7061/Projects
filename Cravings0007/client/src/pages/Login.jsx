@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import loginBg from "../assets/LoReBG.webp";
+import toast, { Toaster } from "react-hot-toast";
 
 const Login = () => {
   const [loginData, setLoginData] = useState({
@@ -25,6 +26,13 @@ const Login = () => {
     };
 
     console.log(payload);
+
+    try {
+      const res = await api.post("/auth/register", payload);
+      toast.success(res.data.message);
+    } catch (error) {
+      toast.error(error.response?.data?.message || error.message);
+    }
   };
 
   return (
@@ -35,7 +43,9 @@ const Login = () => {
       }}
     >
       <div className="w-[450px] bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl p-10">
-        <h2 className="text-4xl font-bold text-gray-800 text-center">Welcome Back</h2>
+        <h2 className="text-4xl font-bold text-gray-800 text-center">
+          Welcome Back
+        </h2>
 
         <p className="text-gray-600 mt-2">
           Login to continue ordering your favourite food.
