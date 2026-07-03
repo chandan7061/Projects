@@ -9,13 +9,15 @@ import Products from "./pages/Products";
 import Contactus from "./pages/Contactus";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import {Toaster} from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
+import UserDashboard from "./pages/dashboard/UserDashboard";
+
 const App = () => {
   return (
     <>
       <BrowserRouter>
-      <Toaster/>
-      
+        <Toaster />
+
         <Navbar />
 
         <Routes>
