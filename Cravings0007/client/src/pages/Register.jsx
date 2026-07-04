@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import loginBg from "../assets/pinkLoginBG.jpg";
+import loginBg from "../assets/contactBG.jpg";
 import api from "../config/api.config.js";
-import { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -16,6 +16,7 @@ const Register = () => {
   });
 
   const [validateError, setValidateError] = useState();
+  const [isChecked, setIsChecked] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -37,6 +38,11 @@ const Register = () => {
     setValidateError("");
     console.log("Register data submitted:", registerData);
 
+    if (!isChecked) {
+      toast.error("Please accept Terms & Conditions");
+      return;
+    }
+
     const payload = {
       fullName: registerData.fullName,
       email: registerData.email.toLowerCase(),
@@ -46,16 +52,20 @@ const Register = () => {
     };
 
     try {
+      console.log(payload);
       const res = await api.post("/auth/register", payload);
-      alert(res.data.message);
+      toast.success(res.data.message);
+      navigate("/login");
     } catch (error) {
-      console.log(error.response?.data?.message || error.message);
-      // console.log(error);
+      toast.error(
+        error.response?.status + " | " + error.response?.data?.message ||
+          error.message,
+      ); // console.log(error);
       // console.log(error.response);
       // console.log(error.message);
     }
   };
- 
+
   return (
     <div
       className="h-[90vh] flex justify-end items-center bg-cover bg-center pr-30"
@@ -118,7 +128,7 @@ const Register = () => {
             value={registerData.fullName}
             onChange={handleChange}
             placeholder="Enter your full name"
-            className="w-full border border-pink-300 p-2.5 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-400"
+            className="w-full border border-blue-300 p-2.5 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-400"
           />
 
           <input
@@ -127,7 +137,7 @@ const Register = () => {
             value={registerData.email}
             onChange={handleChange}
             placeholder="Enter your email"
-            className="w-full border border-pink-300 p-2.5 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-400"
+            className="w-full border border-blue-300 p-2.5 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-400"
           />
 
           <input
@@ -136,7 +146,7 @@ const Register = () => {
             value={registerData.phone}
             onChange={handleChange}
             placeholder="Enter your phone number"
-            className="w-full border border-pink-300 p-2.5 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-400"
+            className="w-full border border-blue-300 p-2.5 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-400"
           />
 
           <input
@@ -145,7 +155,7 @@ const Register = () => {
             value={registerData.password}
             onChange={handleChange}
             placeholder="Create password"
-            className="w-full border border-pink-300 p-2.5 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-400"
+            className="w-full border border-blue-300 p-2.5 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-400"
           />
 
           <input
@@ -154,23 +164,31 @@ const Register = () => {
             value={registerData.confirmPassword}
             onChange={handleChange}
             placeholder="Confirm password"
-            className="w-full border border-pink-300 p-2.5 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-400"
+            className="w-full border border-blue-300 p-2.5 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-400"
           />
 
           <label className="flex items-center gap-2 text-sm text-gray-600">
-            <input type="checkbox" />I agree to the Terms & Conditions
+            <input
+              type="checkbox"
+              checked={isChecked}
+              onChange={(e) => setIsChecked(e.target.checked)}
+            />
+            I agree to the Terms & Conditions
           </label>
 
           <button
-            onClick={() => navigate("/register")}
-            className="w-full bg-pink-500 text-white py-3 rounded-xl font-semibold hover:bg-pink-600 transition duration-300"
+            type="submit"
+            className="w-full bg-blue-500 text-white py-3 rounded-xl font-semibold hover:bg-pink-600 transition duration-300"
           >
             Register
           </button>
 
           <p className="text-center text-gray-600">
             Already have an account?{" "}
-            <span className="text-pink-600 font-semibold cursor-pointer hover:underline">
+            <span
+              onClick={() => navigate("/login")}
+              className="text-blue-500 font-semibold cursor-pointer hover:underline"
+            >
               Login
             </span>
           </p>

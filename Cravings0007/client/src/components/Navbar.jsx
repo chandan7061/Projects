@@ -1,102 +1,80 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import logo from "../assets/headerLOGO.png";
 import { useAuth } from "../context/AuthContext";
 import { AiOutlineLogout } from "react-icons/ai";
+import api from "../config/api.config.js";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
   const { user, setUser, isLogin, setIsLogin } = useAuth();
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    sessionStorage.removeItem("UserData");
-    setIsLogin(false);
-    setUser(false);
-    navigate("/");
+  const handleLogout = async () => {
+    try {
+      const res = await api.get("/auth/logout");
+      sessionStorage.removeItem("UserData");
+      setIsLogin(false);
+      setUser(false);
+      navigate("/");
+      toast.success(res.data.message);
+    } catch (error) {
+      toast.error(
+        error.response.status + " | " + error.response?.data?.message ||
+          error.message,
+      );
+    }
   };
 
   return (
-    <nav className="bg-(--primary) shadow-md">
-      <div className="h-16 px-8 flex items-center justify-between">
-        {/* Logo */}
-        <div className="flex-1">
-          <Link to="/">
-            <img
-              src={logo}
-              alt="Cravings Logo"
-              className="h-14 object-contain"
-            />
-          </Link>
-        </div>
+    <>
+      <div className="bg-(--primary) text-lg text-(--primary-text) p-3 flex justify-between items-center">
+        <div>Cravings</div>
 
-        {/* Center Links */}
-        <div className="flex-1 flex justify-center gap-10">
-          <Link
-            to="/"
-            className="text-(--primary-text) font-medium hover:text-(--accent) transition"
-          >
+        <div className="flex gap-4 items-center">
+          <Link to={"/"} className="hover:underline">
             Home
           </Link>
-
-          <Link
-            to="/contact-us"
-            className="text-(--primary-text) font-medium hover:text-(--accent) transition"
-          >
-            Contact Us
+          <Link to={"/contact-us"} className="hover:underline">
+            Contact us
           </Link>
-        </div>
-
-        {/* Right Side */}
-        <div className="flex-1 flex justify-end items-center gap-4">
           {isLogin ? (
-            <>
-              {/* Profile Photo */}
-              <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-(--accent)">
+            <div className="border-s-2 flex justify-center items-center gap-4 px-4">
+              <div className="w-8 h-8 rounded-full overflow-hidden">
                 <img
                   src={user.photo}
-                  alt={user.fullName}
+                  alt=""
                   className="w-full h-full object-cover"
                 />
               </div>
-
-              {/* User Name */}
               <Link
-                to="/user/dashboard"
-                className="text-(--primary-text) font-medium hover:text-(--accent) transition"
+                to={"/user/dashboard"}
+                className="hover:underline hover:text-(--accent)"
               >
                 {user.fullName}
               </Link>
-
-              {/* Logout Button */}
               <button
                 onClick={handleLogout}
-                className="text-(--primary-text) text-2xl hover:text-red-500 transition"
+                className="text-red-300 hover:text-red-600"
               >
                 <AiOutlineLogout />
               </button>
-            </>
+            </div>
           ) : (
             <>
-              {/* Login */}
               <Link
-                to="/login"
-                className="px-5 py-2 rounded-full bg-(--background) text-(--primary) font-semibold border border-(--background) transition-all duration-300 hover:bg-(--accent) hover:text-(--primary-text)"
+                to={"/login"}
+                className="hover:underline hover:text-(--accent)"
               >
                 Login
               </Link>
-
-              {/* Register */}
-              <Link
-                to="/register"
-                className="px-5 py-2 rounded-full bg-(--accent) text-(--primary-text) font-semibold border border-(--accent) transition-all duration-300 hover:bg-(--background) hover:text-(--primary)"
-              >
+              <Link to={"/register"} className="hover:underline">
                 Register
               </Link>
             </>
           )}
         </div>
       </div>
-    </nav>
+    </>
   );
 };
 
