@@ -1,4 +1,4 @@
-import heroImg from "../assets/MangoTree.avif";
+import heroImg from "../assets/bgimage.avif";
 
 const Home = () => {
   return (
