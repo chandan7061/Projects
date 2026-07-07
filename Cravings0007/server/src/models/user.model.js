@@ -6,32 +6,35 @@ const UserSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-
     email: {
       type: String,
       required: true,
       unique: true,
     },
-
     phone: {
       type: String,
       required: true,
     },
-
-    role: {
+    dob: {
+      type: Date,
+      required: true,
+    },
+    gender: {
       type: String,
       required: true,
-      enum: ["customer", "restaurant", "rider"],
     },
-
     password: {
       type: String,
       required: true,
     },
-
     photo: {
-      type: String,
-      required: true,
+      url: {
+        type: String,
+        required: true,
+      },
+      publicId: {
+        type: String,
+      },
     },
   },
   {

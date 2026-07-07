@@ -1,38 +1,29 @@
 import React from "react";
-
-import { Routes, Route, BrowserRouter } from "react-router-dom";
-
+import { Toaster } from "react-hot-toast";
+import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
-import Products from "./pages/Products";
-import Contactus from "./pages/Contactus";
-import Login from "./pages/Login";
 import Register from "./pages/Register";
-import { Toaster } from "react-hot-toast";
-import UserDashboard from "./pages/dashboard/UserDashboard";
+import Login from "./pages/Login";
+import CustomerDashboard from "./pages/dashboard/CustomerDashboard";
+import Contact from "./pages/Contact";
 
 const App = () => {
   return (
     <>
-      <BrowserRouter>
-        <Toaster />
+      <Toaster />
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/contact" element={<Contact />} />
 
-        <Navbar />
-
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/contactus" element={<Contactus />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-
-          {/* Dashboard Route */}
-          <Route path="/user-dashboard" element={<UserDashboard />} />
-        </Routes>
-
-        <Footer />
-      </BrowserRouter>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/register/:userType" element={<Register />} />
+        <Route path="/customer-dashboard" element={<CustomerDashboard />} />
+      </Routes>
+      <Footer />
     </>
   );
 };

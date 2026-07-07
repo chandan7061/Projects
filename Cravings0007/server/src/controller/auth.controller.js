@@ -4,9 +4,9 @@ import { genToken } from "../utils/auth.service.js";
 
 export const RegisterUser = async (req, res, next) => {
   try {
-    const { fullName, email, phone, role, password } = req.body;
+    const { fullName, email, password, phone, gender, dob } = req.body;
 
-    if (!fullName || !email || !phone || !role || !password) {
+    if (!fullName || !email || !password || !phone || !gender || !dob) {
       const error = new Error("All fields Required");
       error.statusCode = 400;
       return next(error);
@@ -19,8 +19,12 @@ export const RegisterUser = async (req, res, next) => {
       return next(error);
     }
 
-    const photo = `https://placehold.co/600x400?text=${fullName.charAt(0).toUpperCase()}`;
+    const photoURL = `https://placehold.co/600x400?text=${fullName.charAt(0).toUpperCase()}`;
 
+    const photo = {
+      url: photoURL,
+      publicId: null,
+    };
     const SALT = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, SALT);
 
@@ -29,7 +33,8 @@ export const RegisterUser = async (req, res, next) => {
       email,
       password: hashedPassword,
       phone,
-      role,
+      gender,
+      dob,
       photo,
     });
 
@@ -86,3 +91,4 @@ export const LogoutUser = async (req, res, next) => {
     next();
   }
 };
+  

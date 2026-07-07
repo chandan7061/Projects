@@ -4,7 +4,7 @@ import {
   LoginUser,
   LogoutUser,
   RegisterUser,
-} from "../controllers/auth.controller.js";
+} from "../controller/auth.controller.js";
 
 const router = express.Router();
 
@@ -13,5 +13,3 @@ router.post("/login", LoginUser);
 router.get("/logout", LogoutUser);
 
 export default router;
-
-// auth ki kisi functionality me middleware nhi lgta
