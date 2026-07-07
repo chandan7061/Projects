@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { IoChevronBack, IoChevronForward } from "react-icons/io5";
-import bgImage1 from "../assets/carousel/bgImage1.jpg";
-import bgImage2 from "../assets/carousel/bgImage2.jpg";
-import bgImage3 from "../assets/carousel/bgImage3.jpg";
-import bgImage4 from "../assets/carousel/bgImage4.jpg";
+import bgImage1 from "../assets/Carousel/bgImage1.jpg";
+import bgImage2 from "../assets/Carousel/bgImage2.jpg";
+import bgImage3 from "../assets/Carousel/bgImage3.jpg";
+import bgImage4 from "../assets/Carousel/bgImage4.jpg";
 
 const CarouselComponent = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
