@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useParams, useNavigate } from "react-router-dom";
-import api from "../config/api.config";
+import api from "../config/Api.Config";
 
 const Register = () => {
   const userType = useParams().userType; // Get userType from URL params (if needed)

@@ -10,7 +10,7 @@ import {
 } from "react-icons/md";
 import CarouselComponent from "../components/CarouselComponent";
 import { useAuth } from "../context/AuthContext";
-import api from "../config/api.config";
+import api from "../config/Api.Config";
 
 const Home = () => {
   const navigate = useNavigate();

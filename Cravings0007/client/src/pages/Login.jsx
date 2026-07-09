@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import api from "../config/api.config";
+import api from "../config/Api.Config";
 import { useAuth } from "../context/AuthContext";
 
 const Login = () => {
@@ -59,15 +59,15 @@ const Login = () => {
       setIsLogin(true);
       //console.log(res.data.data.userType);
       setRole(res.data.data.userType);
-      if (res.data.data.userType === "restaurant") {
+
+      res.data.data.userType === "restaurant" &&
         navigate("/restaurant-dashboard");
-      } else if (res.data.data.userType === "rider") {
-        navigate("/rider-dashboard");
-      } else if (res.data.data.userType === "admin") {
-        navigate("/admin-dashboard");
-      } else {
-        navigate("/customer-dashboard");
-      }
+
+      res.data.data.userType === "rider" && navigate("/rider-dashboard");
+
+      res.data.data.userType === "admin" && navigate("/admin-dashboard");
+
+      res.data.data.userType === "customer" && navigate("/customer-dashboard");
     } catch (error) {
       toast.error(
         error.response?.data?.message ||

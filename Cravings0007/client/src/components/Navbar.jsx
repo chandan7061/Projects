@@ -4,7 +4,8 @@ import logoLight from "../assets/transparentLogoLight.png";
 import { useAuth } from "../context/AuthContext";
 import { FaPowerOff } from "react-icons/fa";
 import toast from "react-hot-toast";
-import api from "../config/api.config";
+import api from "../config/Api.Config";
+
 const Navbar = () => {
   const { user, isLogin, role, setUser, setIsLogin, setRole } = useAuth();
   const navigate = useNavigate();
@@ -64,8 +65,8 @@ const Navbar = () => {
               />
               <div className="flex flex-col items-start">
                 <span className="text-base">{user?.fullName}</span>
-                <span className="text-xs text-(--color-primary-content)/80">
-                  Customer
+                <span className="text-xs text-(--color-primary-content)/80 uppercase">
+                  {role}
                 </span>
               </div>
             </button>
