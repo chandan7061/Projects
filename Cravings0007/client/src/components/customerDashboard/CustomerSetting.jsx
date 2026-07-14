@@ -3,8 +3,7 @@ import { MdEdit } from "react-icons/md";
 import { useAuth } from "../../context/AuthContext";
 import api from "../../config/Api.Config";
 import toast from "react-hot-toast";
-import { MdOutlineAddAPhoto } from "react-icons/md";
-import { MdOutlineLockReset } from "react-icons/md";
+import { MdOutlineAddAPhoto, MdOutlineLockReset } from "react-icons/md";
 import PasswordChangeModal from "../commonModals/PasswordChangeModal";
 
 const CustomerSetting = () => {
