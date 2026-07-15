@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import api from "../config/Api.Config";
+import api from "../config/ApiConfig";
 import { useAuth } from "../context/AuthContext";
 import ForgotPasswordModal from "../components/commonModals/ForgotPasswordModal";
 
