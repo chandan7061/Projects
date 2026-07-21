@@ -38,8 +38,8 @@ const CustomerSetting = () => {
 
       payload.append("displayPic", profilePic);
 
-      const response = await api.put(`/user/edit-profile`, payload);
-
+      const response = await api.put("/public/edit-profile", payload);
+      
       setUser(response.data.data);
       sessionStorage.setItem("cravingUser", JSON.stringify(response.data.data));
 
