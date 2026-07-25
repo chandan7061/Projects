@@ -10,7 +10,7 @@ button {
 
 :root {
   /* Primary */
-  --color-primary: #0a38f1;
+  --color-primary: #c2410c;
   --color-primary-content: #ffffff;
 
   /* Secondary */
@@ -64,4 +64,10 @@ input[type="number"] {
 /* Remove password input eye icon */
 input[type="password"]::-ms-reveal {
   display: none;
+}
+
+textarea:disabled,
+select:disabled,
+input:disabled {
+  cursor: not-allowed;
 }
