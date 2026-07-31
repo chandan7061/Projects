@@ -1,15 +1,16 @@
 import express from "express";
-import multer from "multer";
-import { EditUserProfile } from "../controller/common.controller.js";
-import { AuthProtect } from "../middleware/auth.middelware.js";
-const Upload = multer();
+import {
+  ContactUsForm,
+  GetAllRestaurants,
+  GetRestaurantDetails,
+} from "../controller/public.controller.js";
+
 const router = express.Router();
 
-router.put(
-  "/edit-profile",
-  AuthProtect,
-  Upload.single("displayPic"),
-  EditUserProfile,
-);
+router.post("/contact-us", ContactUsForm);
+
+router.get("/restaurants", GetAllRestaurants);
+
+router.get("/restaurant-detail/:restaurantId", GetRestaurantDetails);
 
 export default router;
